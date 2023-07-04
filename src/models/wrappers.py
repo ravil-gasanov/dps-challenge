@@ -10,7 +10,10 @@ class ProphetWrapper(BaseEstimator, RegressorMixin):
              'is_jul', 'is_aug', 'is_sep', 'is_oct', 'is_nov', 'is_dec']
     
     def get_month_dummies(self, month):
-        dummies = pd.get_dummies(month)
+        dummy_month = pd.Series(list(range(1, 13)))
+        dummies = pd.get_dummies(pd.concat([dummy_month, month.astype(int)], axis = 0)).reset_index(drop=True)
+        dummies = dummies.loc[12:, :].reset_index(drop = True)
+
         dummies.columns = [r for r in self.additional_regs]
 
         return dummies
@@ -36,7 +39,8 @@ class ProphetWrapper(BaseEstimator, RegressorMixin):
         future = pd.DataFrame()
         future['ds'] = X['date']
         dummies = self.get_month_dummies(X['month'])
-        future = pd.concat([future, dummies], axis = 1)
+        dummies.index = future.index
+        future = pd.concat([future, dummies], axis = 1)        
 
         return self.model_fit.predict(future)['yhat']
 

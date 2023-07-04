@@ -81,7 +81,7 @@ def choose_model(X, y):
     best_model_score = model_score[best_model_name]
 
     best_model = [model for model in models if best_model_name == model[0]]
-    best_model = make_pipe(best_model)
+    model = make_pipe((best_model_name, best_model))[1]
     
 
     print(f"Best model: {best_model_name} with MAE = {best_model_score}")
