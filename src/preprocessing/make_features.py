@@ -13,4 +13,4 @@ def make_date(year, month):
     month: pd.Series
     returns: pd.Series
     '''
-    return pd.to_datetime(year.astype(str) + '-' + month).dt.to_period('M').dt.to_timestamp('M')
+    return pd.to_datetime(year.astype(str) + '-' + month.astype(str)).dt.to_period('M').dt.to_timestamp('M')
