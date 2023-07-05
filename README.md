@@ -1,1 +1,1 @@
-# ml-template
+# Digital Product School Challenge
