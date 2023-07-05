@@ -1,7 +1,8 @@
 import requests
 
 def send_request():
-    url = "http://localhost:5000/predict"
+    # url = "http://localhost:5000/predict"
+    url = "https://abitur.pythonanywhere.com/predict"
 
     for i in range(1, 13):
         x_json = {
